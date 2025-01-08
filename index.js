@@ -112,17 +112,42 @@ function addTransaction(e) {
     renderList();
 }
 
+// function addBudget() {
+//     if(budgetSavings.value == "onHand"){
+//         var onHandVal = parseInt(amount2.value); 
+//         onHand.innerHTML = formatter.format(parseInt(amount2.value)); 
+//         if(onBankVal == null) {
+//             onBankVal = 0;
+//         }
+//         console.log("onHand-",onHandVal);
+//     } else if(budgetSavings.value == "onBank") {  
+//         var onBankVal =  parseInt(amount2.value); 
+//         onBank.innerHTML = formatter.format(parseInt(amount2.value)); 
+//         if(onHandVal == null) {
+//             onHandVal = 0;
+//         }
+//         console.log("onBank", onBankVal);
+//     } else if(budgetSavings.value == "kfc") {
+//         kfc.innerHTML = formatter.format(parseInt(amount2.value) + 0);
+//     } else if(budgetSavings.value == "inviMoney") {
+//         inviMoney.innerHTML = formatter.format(parseInt(amount2.value) + 0);
+//     }
+//     console.log("after if onHand-",onHandVal);
+//     console.log("after if onBank-",onBankVal);
+//     budget.innerHTML = formatter.format(onHandVal + onBankVal);
+// }
+
 function addBudget() {
     if(budgetSavings.value == "onHand"){
         var onHandVal = parseInt(amount2.value); 
-        onHand.innerHTML = formatter.format(parseInt(amount2.value)); 
+        onHand.innerHTML = (parseInt(amount2.value)); 
         if(onBankVal == null) {
             onBankVal = 0;
         }
         console.log("onHand-",onHandVal);
     } else if(budgetSavings.value == "onBank") {  
-        var onBankVal =  parseInt(amount2.value) + 0; 
-        onBank.innerHTML = formatter.format(parseInt(amount2.value) + 0); 
+        var onBankVal =  parseInt(amount2.value); 
+        onBank.innerHTML = (parseInt(amount2.value)); 
         if(onHandVal == null) {
             onHandVal = 0;
         }
@@ -134,7 +159,8 @@ function addBudget() {
     }
     console.log("after if onHand-",onHandVal);
     console.log("after if onBank-",onBankVal);
-    budget.innerHTML = formatter.format(onHandVal + onBankVal);
+
+    budget.innerHTML = parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML);
 }
 
 function addHistory() {
