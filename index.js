@@ -114,19 +114,26 @@ function addTransaction(e) {
 
 function addBudget() {
     if(budgetSavings.value == "onHand"){
-        var onHandVal = parseInt(amount2.value) + 0; 
-        onHand.innerHTML = formatter.format(parseInt(amount2.value) + 0); 
-        // var onHandVal = formatter.format(parseFloat(amount2.value));
+        var onHandVal = parseInt(amount2.value); 
+        onHand.innerHTML = formatter.format(parseInt(amount2.value)); 
+        if(onBankVal == null) {
+            onBankVal = 0;
+        }
+        console.log("onHand-",onHandVal);
     } else if(budgetSavings.value == "onBank") {  
         var onBankVal =  parseInt(amount2.value) + 0; 
         onBank.innerHTML = formatter.format(parseInt(amount2.value) + 0); 
-        // var onBankVal = formatter.format(parseFloat(amount2.value));
+        if(onHandVal == null) {
+            onHandVal = 0;
+        }
+        console.log("onBank", onBankVal);
     } else if(budgetSavings.value == "kfc") {
         kfc.innerHTML = formatter.format(parseInt(amount2.value) + 0);
     } else if(budgetSavings.value == "inviMoney") {
         inviMoney.innerHTML = formatter.format(parseInt(amount2.value) + 0);
     }
- 
+    console.log("after if onHand-",onHandVal);
+    console.log("after if onBank-",onBankVal);
     budget.innerHTML = formatter.format(onHandVal + onBankVal);
 }
 
