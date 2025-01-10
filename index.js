@@ -1,4 +1,4 @@
-const transactionss = JSON.parse(localStorage.getItem("transactionss")) || [];
+const transactionsBud = JSON.parse(localStorage.getItem("transactionsBud")) || [];
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -16,7 +16,7 @@ const expTransactions = document.getElementById("transaction");
 const header = document.getElementById("header");
 const expList = document.getElementById("expenseList");
 const expStatus = document.getElementById("expStatus");
-const save = document.getElementById("save");
+const saveBud = document.getElementById("save");
 const title = document.getElementById("title");
 const actRemove = document.getElementById("actRemove");
 const titleInput = document.getElementById("titleInput");
@@ -33,10 +33,10 @@ const inviMoney = document.getElementById("inviMoney");  //---------Invisible Mo
 form.addEventListener('submit', addTransaction);
 
 function updateTotal() {
-    const incomeTotal = transactionss
+    const incomeTotal = transactionsBud
         .filter((trx) => trx.type === "income")
         .reduce((total, trx) => total + trx.amount, 0);
-    const expenseTotal = transactionss
+    const expenseTotal = transactionsBud
         .filter((trx) => trx.type === "expense")
         .reduce((total, trx) => total + trx.amount, 0);
 
@@ -52,12 +52,12 @@ function renderList() {
     list.innerHTML = "";
 
     status.textContent = "";
-    if(transactionss.length === 0) {
+    if(transactionsBud.length === 0) {
         status.textContent = "No transactions";
         return;
     }
 
-    transactionss.forEach(({ id, name, amount, date, type }) => {
+    transactionsBud.forEach(({ id, name, amount, date, type }) => {
         const sign = 'income' === type ? 1 : -1;
 
         const li = document.createElement('li');
@@ -84,11 +84,12 @@ function renderList() {
 
 renderList(); 
 renderExp();
+renderBudget();
 updateTotal();
 
 function deleteTransaction(id) {
-    const index = transactionss.findIndex((trx) => trx.id === id)
-    transactionss.splice(index, 1);
+    const index = transactionsBud.findIndex((trx) => trx.id === id)
+    transactionsBud.splice(index, 1);
 
     updateTotal();
     saveTransactions(); 
@@ -98,8 +99,8 @@ function deleteTransaction(id) {
 function addTransaction(e) {
     e.preventDefault();
     const formData = new FormData(this);
-    transactionss.push({
-        id: transactionss.length + 1,
+    transactionsBud.push({
+        id: transactionsBud.length + 1,
         name: formData.get("name"),
         amount: parseFloat(formData.get("amount")),
         date: new Date(formData.get("date")),
@@ -112,31 +113,6 @@ function addTransaction(e) {
     renderList();
 }
 
-// function addBudget() {
-//     if(budgetSavings.value == "onHand"){
-//         var onHandVal = parseInt(amount2.value); 
-//         onHand.innerHTML = formatter.format(parseInt(amount2.value)); 
-//         if(onBankVal == null) {
-//             onBankVal = 0;
-//         }
-//         console.log("onHand-",onHandVal);
-//     } else if(budgetSavings.value == "onBank") {  
-//         var onBankVal =  parseInt(amount2.value); 
-//         onBank.innerHTML = formatter.format(parseInt(amount2.value)); 
-//         if(onHandVal == null) {
-//             onHandVal = 0;
-//         }
-//         console.log("onBank", onBankVal);
-//     } else if(budgetSavings.value == "kfc") {
-//         kfc.innerHTML = formatter.format(parseInt(amount2.value) + 0);
-//     } else if(budgetSavings.value == "inviMoney") {
-//         inviMoney.innerHTML = formatter.format(parseInt(amount2.value) + 0);
-//     }
-//     console.log("after if onHand-",onHandVal);
-//     console.log("after if onBank-",onBankVal);
-//     budget.innerHTML = formatter.format(onHandVal + onBankVal);
-// }
-
 function addBudget() {
     if(budgetSavings.value == "onHand"){
         var onHandVal = parseInt(amount2.value); 
@@ -144,23 +120,22 @@ function addBudget() {
         if(onBankVal == null) {
             onBankVal = 0;
         }
-        console.log("onHand-",onHandVal);
     } else if(budgetSavings.value == "onBank") {  
         var onBankVal =  parseInt(amount2.value); 
         onBank.innerHTML = (parseInt(amount2.value)); 
         if(onHandVal == null) {
             onHandVal = 0;
         }
-        console.log("onBank", onBankVal);
     } else if(budgetSavings.value == "kfc") {
-        kfc.innerHTML = formatter.format(parseInt(amount2.value) + 0);
+        kfc.innerHTML = parseInt(amount2.value);
     } else if(budgetSavings.value == "inviMoney") {
-        inviMoney.innerHTML = formatter.format(parseInt(amount2.value) + 0);
+        inviMoney.innerHTML = parseInt(amount2.value);
     }
-    console.log("after if onHand-",onHandVal);
-    console.log("after if onBank-",onBankVal);
 
-    budget.innerHTML = parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML);
+    budget.innerHTML = formatter.format(parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML));
+
+    saveBudget();
+
 }
 
 function addHistory() {
@@ -170,7 +145,7 @@ function addHistory() {
     li.appendChild(titleIn);
     li.innerHTML = `<div id="titleDiv">
     <h1>${titleInput.value}</h1><span id="drop"></span></div>
-    ${save.innerHTML}`;
+    ${saveBud.innerHTML}`;
     expList.appendChild(li);
     titleInput.value = "";
     saveH();
@@ -179,31 +154,48 @@ function addHistory() {
 }
 
 function renderExp() {
-   expList.innerHTML = localStorage.getItem("saveHist");
+   expList.innerHTML = localStorage.getItem("saveHistBud");
 }
 
 function renderBudget() {
-    saveBud2.innerHTML = localStorage.getItem("saveBud");
+    let budgetOne = localStorage.getItem("budgetSav");
+    let onHandOne = localStorage.getItem("onHandSav");
+    let onBankOne = localStorage.getItem("onBankSav");
+    let kfcOne = localStorage.getItem("kfcSav");
+    let inviOne = localStorage.getItem("inviSav");
+    budget.innerHTML = budgetOne;
+    onHand.innerHTML = onHandOne;
+    onBank.innerHTML = onBankOne;
+    kfc.innerHTML = kfcOne;
+    inviMoney.innerHTML = inviOne;
 }
 
 function removeExp() {
-    transactionss.splice(0,transactionss.length);
+    transactionsBud.splice(0,transactionsBud.length);
     updateTotal();
     saveTransactions();
     renderList();
 }
 
 function saveTransactions() {
-    transactionss.sort((a,b) => new Date(b.date) - new Date(a.date));
-    localStorage.setItem("transactionss", JSON.stringify(transactionss));
+    transactionsBud.sort((a,b) => new Date(b.date) - new Date(a.date));
+    localStorage.setItem("transactionsBud", JSON.stringify(transactionsBud));
 }
 
 function saveHistory() {
-    localStorage.setItem("save", save.innerHTML);
+    localStorage.setItem("saveBud", saveBud.innerHTML);
 }
 
 function saveH() {
-    localStorage.setItem("saveHist", expList.innerHTML);
+    localStorage.setItem("saveHistBud", expList.innerHTML);
+}
+
+function saveBudget() {
+    localStorage.setItem("onHandSav", onHand.innerHTML);
+    localStorage.setItem("onBankSav", onBank.innerHTML);
+    localStorage.setItem("budgetSav", budget.innerHTML);
+    localStorage.setItem("kfcSav", kfc.innerHTML);
+    localStorage.setItem("inviSav", inviMoney.innerHTML);
 }
 
 expList.addEventListener("click", function(e) {
