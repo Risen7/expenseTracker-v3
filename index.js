@@ -1,8 +1,8 @@
 const transactionsBud = JSON.parse(localStorage.getItem("transactionsBud")) || [];
 
 const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'PHP',
+    // style: 'currency',
+    // currency: 'PHP',
     // signDisplay: "always",
 });
     
@@ -164,10 +164,19 @@ function renderBudget() {
     let kfcOne = localStorage.getItem("kfcSav");
     let inviOne = localStorage.getItem("inviSav");
     budget.innerHTML = budgetOne;
-    onHand.innerHTML = onHandOne;
-    onBank.innerHTML = onBankOne;
-    kfc.innerHTML = kfcOne;
-    inviMoney.innerHTML = inviOne;
+    onHand.innerHTML = formatter.format(onHandOne);
+    onBank.innerHTML = formatter.format(onBankOne);
+    kfc.innerHTML = formatter.format(kfcOne);
+    inviMoney.innerHTML = formatter.format(inviOne);
+    lala = 1;
+    if(budget.innerHTML == ""){
+        console.log("HAHAHAHA");
+        budget.innerHTML = formatter.format(0);
+        onHand.innerHTML = 0;
+        onBank.innerHTML = 0;
+        kfc.innerHTML = 0;
+        inviMoney.innerHTML = 0;
+    }
 }
 
 function removeExp() {
