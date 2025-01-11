@@ -1,10 +1,11 @@
 const transactionsBud = JSON.parse(localStorage.getItem("transactionsBud")) || [];
 
 const formatter = new Intl.NumberFormat('en-US', {
-    // style: 'currency',
-    // currency: 'PHP',
-    // signDisplay: "always",
+    style: 'currency',
+    currency: 'PHP',
+    signDisplay: "always",
 });
+
     
 const list = document.getElementById("transactionList");
 const form = document.getElementById("transactionForm");
@@ -131,9 +132,9 @@ function addBudget() {
     } else if(budgetSavings.value == "inviMoney") {
         inviMoney.innerHTML = parseInt(amount2.value);
     }
-
-    budget.innerHTML = formatter.format(parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML));
-
+    console.log(onHand);
+    console.log(onBank);
+    budget.textContent = formatter.format(parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML)).substring(1);
     saveBudget();
 
 }
@@ -163,15 +164,15 @@ function renderBudget() {
     let onBankOne = localStorage.getItem("onBankSav");
     let kfcOne = localStorage.getItem("kfcSav");
     let inviOne = localStorage.getItem("inviSav");
-    budget.innerHTML = budgetOne;
-    onHand.innerHTML = formatter.format(onHandOne);
-    onBank.innerHTML = formatter.format(onBankOne);
-    kfc.innerHTML = formatter.format(kfcOne);
-    inviMoney.innerHTML = formatter.format(inviOne);
+    budget.innerHTML = budgetOne  //.substring(1);
+    onHand.innerHTML = onHandOne;
+    onBank.innerHTML = onBankOne;
+    kfc.innerHTML = kfcOne;
+    inviMoney.innerHTML = inviOne;
     lala = 1;
     if(budget.innerHTML == ""){
-        console.log("HAHAHAHA");
-        budget.innerHTML = formatter.format(0);
+        // console.log("HAHAHAHA");
+        budget.innerHTML = formatter.format(0).substring(1);
         onHand.innerHTML = 0;
         onBank.innerHTML = 0;
         kfc.innerHTML = 0;
