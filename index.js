@@ -5,8 +5,7 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'PHP',
     signDisplay: "always",
 });
-
-    
+  
 const list = document.getElementById("transactionList");
 const form = document.getElementById("transactionForm");
 const status = document.getElementById("status");
@@ -30,6 +29,8 @@ const onHand = document.getElementById("onHand");  //---------------On Hand Numb
 const onBank = document.getElementById("onBank");  //---------------On Bank Number Display-------------------->
 const kfc = document.getElementById("kfc");  //---------------------KFC Number Display------------------------>
 const inviMoney = document.getElementById("inviMoney");  //---------Invisible Money Number Display------------>
+var onHandVal;
+var onBankVal;
 
 form.addEventListener('submit', addTransaction);
 
@@ -114,44 +115,113 @@ function addTransaction(e) {
     renderList();
 }
 
+// function addBudget() {
+//     if(budgetSavings.value == "onHand"){
+//         var onHandVal = parseInt(amount2.value); 
+//         onHand.innerHTML = (parseInt(amount2.value)); 
+//         // if(onBankVal == null) {
+//         //     onBankVal = 0;
+//         // }
+//     } else if(budgetSavings.value == "onBank") {  
+//         var onBankVal =  parseInt(amount2.value); 
+//         onBank.innerHTML = (parseInt(amount2.value)); 
+//         // if(onHandVal == null) {
+//         //     onHandVal = 0;
+//         // }
+//     } else if(budgetSavings.value == "kfc") {
+//         kfc.innerHTML = parseInt(amount2.value);
+//     } else if(budgetSavings.value == "inviMoney") {
+//         inviMoney.innerHTML = parseInt(amount2.value);
+//     }
+//     console.log(onHandVal);
+//     console.log(onBankVal);
+//     budget.textContent = formatter.format(parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML)).substring(1);
+//     saveBudget();
+// }
+
 function addBudget() {
-    if(budgetSavings.value == "onHand"){
-        var onHandVal = parseInt(amount2.value); 
-        onHand.innerHTML = (parseInt(amount2.value)); 
-        if(onBankVal == null) {
-            onBankVal = 0;
-        }
-    } else if(budgetSavings.value == "onBank") {  
-        var onBankVal =  parseInt(amount2.value); 
-        onBank.innerHTML = (parseInt(amount2.value)); 
-        if(onHandVal == null) {
-            onHandVal = 0;
-        }
-    } else if(budgetSavings.value == "kfc") {
+    if(budgetSavings.value == "onHand"){ 
+        console.log("1 - IF - ON HAND SELECTED");
+        onHandVal = parseInt(amount2.value);
+        console.log("2 -onHandVal = ",onHandVal);
+        onHand.innerHTML = parseInt(amount2.value); 
+        console.log("3 -onHand amount = ", onHand.innerHTML);
+        saveBudget();
+        console.log("4 - save budget");
+        renderBudget();
+        console.log("5 - render budget");
+    }
+    if(budgetSavings.value == "onBank") {  
+        console.log("1 - IF - ON BANK SELECTED");
+        console.log("onHandVal = ", onHandVal);
+        onBankVal = parseInt(amount2.value);
+        console.log("2 -onBankVal = ", onBankVal);
+        onBank.innerHTML = parseInt(amount2.value); 
+        console.log("3 -onBank amount", onBank.innerHTML);
+        saveBudget();
+        console.log("4 - savebudget");
+        renderBudget();
+        console.log("5 - renderbudget");
+    }
+
+
+
+
+
+
+    if(budgetSavings.value == "kfc") {
         kfc.innerHTML = parseInt(amount2.value);
-    } else if(budgetSavings.value == "inviMoney") {
+    }
+    if(budgetSavings.value == "inviMoney") {
         inviMoney.innerHTML = parseInt(amount2.value);
     }
-    console.log(onHand);
-    console.log(onBank);
+
+
+
+
+
+
+    if(onHandVal == undefined) {
+        console.log("6 - IF onHandVal = undefined");
+        onHandVal = 0;
+        console.log("7 - onHandVal = ", onHandVal);
+    } else {
+        console.log("8 - ELSE - do nothing");
+    }
+    if(onBankVal == undefined) {
+        console.log("9 - IF onBankVal = undefined");
+        onBankVal = 0;
+        console.log("10 - onBankVal = ", onBankVal);
+    } else {
+        console.log("11 - ELSE - do nothing");
+        
+    }
+    console.log("12 -ON HAND VAL past on if condition", onHandVal);
+    console.log("13 -ON BANK VAL past on if condition",onBankVal);
+    console.log("14  |onHandVal - ", onHandVal, "| onBankVal - " + onBankVal, "|" , onHandVal + onBankVal);
     budget.textContent = formatter.format(parseInt(onHand.innerHTML) + parseInt(onBank.innerHTML)).substring(1);
     saveBudget();
-
 }
 
 function addHistory() {
-    const li = document.createElement('history') 
-    const titleIn = document.createElement('h1')  
-    titleIn.innerHTML = titleInput.value; 
-    li.appendChild(titleIn);
-    li.innerHTML = `<div id="titleDiv">
-    <h1>${titleInput.value}</h1><span id="drop"></span></div>
-    ${saveBud.innerHTML}`;
-    expList.appendChild(li);
-    titleInput.value = "";
-    saveH();
-    saveHistory();
-    removeExp();
+    let text = "It will clear the transaction data and move to history. Are you sure you want to save?"
+    if(confirm(text) == true) {
+        const li = document.createElement('history') 
+        const titleIn = document.createElement('h1')  
+        titleIn.innerHTML = titleInput.value; 
+        li.appendChild(titleIn);
+        li.innerHTML = `<div id="titleDiv">
+        <h1>${titleInput.value}</h1><span id="drop"></span></div>
+        ${saveBud.innerHTML}`;
+        expList.appendChild(li);
+        titleInput.value = "";
+        saveH();
+        saveHistory();
+        removeExp();
+        alert("Data moved to History");
+    } else {
+        alert("Data not moved.")
+    }
 }
 
 function renderExp() {
@@ -169,7 +239,6 @@ function renderBudget() {
     onBank.innerHTML = onBankOne;
     kfc.innerHTML = kfcOne;
     inviMoney.innerHTML = inviOne;
-    lala = 1;
     if(budget.innerHTML == ""){
         // console.log("HAHAHAHA");
         budget.innerHTML = formatter.format(0).substring(1);
