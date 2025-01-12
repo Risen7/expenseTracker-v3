@@ -170,10 +170,10 @@ function addBudget() {
 
 
     if(budgetSavings.value == "kfc") {
-        kfc.innerHTML = parseInt(amount2.value);
+        kfc.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);;
     }
     if(budgetSavings.value == "inviMoney") {
-        inviMoney.innerHTML = parseInt(amount2.value);
+        inviMoney.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);;
     }
 
 
@@ -244,8 +244,8 @@ function renderBudget() {
         budget.innerHTML = formatter.format(0).substring(1);
         onHand.innerHTML = 0;
         onBank.innerHTML = 0;
-        kfc.innerHTML = 0;
-        inviMoney.innerHTML = 0;
+        kfc.innerHTML = formatter.format(0).substring(1);;
+        inviMoney.innerHTML = formatter.format(0).substring(1);
     }
 }
 
