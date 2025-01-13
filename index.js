@@ -148,10 +148,8 @@ function addBudget() {
         console.log("3 -onHand amount = ", onHand.innerHTML);
         saveBudget();
         console.log("4 - save budget");
-        renderBudget();
-        console.log("5 - render budget");
-        saveBudget();
-        renderBudget();
+        // renderBudget();
+        // console.log("5 - render budget");
     }
 
     if(budgetSavings.value == "onBank") {  
@@ -163,18 +161,20 @@ function addBudget() {
         console.log("3 -onBank amount", onBank.innerHTML);
         saveBudget();
         console.log("4 - savebudget");
-        renderBudget();
-        console.log("5 - renderbudget");
-        saveBudget();
-        renderBudget();
+        // renderBudget();
+        // console.log("5 - renderbudget");
     }
-
     if(budgetSavings.value == "kfc") {
-        kfc.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);;
+        kfc.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);
+        console.log("15 - KFC amount");
+        saveBudget();
     }
     if(budgetSavings.value == "inviMoney") {
-        inviMoney.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);;
+        inviMoney.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);
+        console.log("15 - Invi amount");
+        saveBudget();
     }
+    renderBudget();
     if(onHandVal == undefined) {
         console.log("6 - IF onHandVal = undefined");
         onHandVal = 0;
@@ -224,21 +224,32 @@ function renderExp() {
 
 function renderBudget() {
     let budgetOne = localStorage.getItem("budgetSav");
-    let onHandOne = localStorage.getItem("onHandSav");
-    let onBankOne = localStorage.getItem("onBankSav");
+    // let onHandOne = localStorage.getItem("onHandSav");
+    // let onBankOne = localStorage.getItem("onBankSav");
+    let onHandVal = localStorage.getItem("onHandVal");
+    let onBankVal = localStorage.getItem("onBankVal");
     let kfcOne = localStorage.getItem("kfcSav");
     let inviOne = localStorage.getItem("inviSav");
     budget.innerHTML = budgetOne  //.substring(1);
-    onHand.innerHTML = formatter.format(onHandOne);
-    onBank.innerHTML = formatter.format(onBankOne);
+    // budget.innerHTML = formatter.format(parseInt(onHandOne + onBankOne)).substring(1);
+    
+    onHand.innerHTML = formatter.format(onHandVal).substring(1);
+    onBank.innerHTML = formatter.format(onBankVal).substring(1);
     kfc.innerHTML = kfcOne;
     inviMoney.innerHTML = inviOne;
     if(budget.innerHTML == ""){
-        // console.log("HAHAHAHA");
         budget.innerHTML = formatter.format(0).substring(1);
+    } 
+    if (onHand.innerHTML == "") {
         onHand.innerHTML = formatter.format(0).substring(1);
+    }
+    if (onBank.innerHTML == "") {
         onBank.innerHTML = formatter.format(0).substring(1);
-        kfc.innerHTML = formatter.format(0).substring(1);;
+    }
+    if (kfc.innerHTML == "") {
+        kfc.innerHTML = formatter.format(0).substring(1);
+    }
+    if (inviMoney.innerHTML == "") {
         inviMoney.innerHTML = formatter.format(0).substring(1);
     }
 }
@@ -264,8 +275,10 @@ function saveH() {
 }
 
 function saveBudget() {
-    localStorage.setItem("onHandSav", onHandVal);
-    localStorage.setItem("onBankSav", onBankVal);
+    // localStorage.setItem("onHandSav", onHand.innerHTML);
+    // localStorage.setItem("onBankSav", onBank.innerHTML);
+    localStorage.setItem("onHandVal", onHandVal);
+    localStorage.setItem("onBankVal", onBankVal);
     localStorage.setItem("budgetSav", budget.innerHTML);
     localStorage.setItem("kfcSav", kfc.innerHTML);
     localStorage.setItem("inviSav", inviMoney.innerHTML);
