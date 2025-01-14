@@ -126,61 +126,34 @@ function addBudget() {
     }
 
     if(budgetSavings.value == "onBank") {  
-        console.log("1 onHand = ", onBank);
-        console.log("1 onBank = ", onHand);
         onBankVal = parseInt(amount2.value);
-        console.log("2 onHand = ", onBank);
-        console.log("2 onBank = ", onHand);
         onBank.innerHTML = formatter.format(parseInt(amount2.value)).substring(1); 
-        console.log("3 onHand = ", onBank);
-        console.log("3 onBank = ", onHand);
         if(onHandVal == null) {
             onHandVal = parseInt(0);
         }
         saveBudget();
-        console.log("4 onHand = ", onBank);
-        console.log("4 onBank = ", onHand);
     }
 
     if(budgetSavings.value == "kfc") {
         kfc.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);
-        console.log("5 onHand = ", onBank);
-        console.log("5 onBank = ", onHand);
         saveBudget();
     }
     if(budgetSavings.value == "inviMoney") {
         inviMoney.innerHTML = formatter.format(parseInt(amount2.value)).substring(1);
-        console.log("5 onHand = ", onBank);
-        console.log("5 onBank = ", onHand);
         saveBudget();
     }
     renderBudget();
-        console.log("6 onHand = ", onBank);
-        console.log("6 onBank = ", onHand);
     if(onHandVal == undefined ) {
-        console.log("7 onHand = ", onBank);
-        console.log("7 onBank = ", onHand);
         onHandVal = parseInt(0);
-        console.log("8 onHand = ", onBank);
-        console.log("8 onBank = ", onHand);
     } else {
-        console.log("9 onHand = ", onBank);
-        console.log("9 onBank = ", onHand);
+
     }
     if(onBankVal == undefined ) {
-        onBankVal = parseInt(0);
-        console.log("10 onHand = ", onBank);
-        console.log("10 onBank = ", onHand);
+
     } else {
-        console.log("11 onHand = ", onBank);
-        console.log("11 onBank = ", onHand);
+
     }
-    console.log("12 onHand = ", onBank);
-    console.log("12 onBank = ", onHand);
-    console.log("?  |onHandVal - ", onHandVal, "| onBankVal - " + onBankVal, "|" , onHandVal + onBankVal);
     budget.innerHTML = formatter.format(parseInt(onHandVal) + parseInt(onBankVal)).substring(1);
-    console.log("13 onHand = ", onBank);
-    console.log("13 onBank = ", onHand);
     saveBudget();
 }
 
@@ -215,7 +188,7 @@ function renderBudget() {
     onBankVal = localStorage.getItem("onBankVal");
     let kfcOne = localStorage.getItem("kfcSav");
     let inviOne = localStorage.getItem("inviSav");
-    budget.innerHTML = budgetOne  //.substring(1);
+    budget.innerHTML = budgetOne
     
     onHand.innerHTML = formatter.format(onHandVal).substring(1);
     onBank.innerHTML = formatter.format(onBankVal).substring(1);
@@ -236,10 +209,6 @@ function renderBudget() {
     if (inviMoney.innerHTML == "") {
         inviMoney.innerHTML = formatter.format(0).substring(1);
     }
-    // console.log(onHandVal);
-    // console.log(onBankVal);
-    console.log("0 - onhand", onHand);
-    console.log("0 - onbank", onBank);
 }
 
 function removeExp() {
