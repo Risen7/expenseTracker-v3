@@ -268,5 +268,9 @@ expList.addEventListener("click", function(e) {
         e.target.parentElement.parentElement.parentElement.children[2].classList.toggle("active");
         saveH();
         saveHistory();
+    } else if(e.target.tagName === "P") {
+        e.target.parentElement.parentElement.parentElement.remove();
+        saveH();
+        saveHistory();
     }
 });
