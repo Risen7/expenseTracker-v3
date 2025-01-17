@@ -5,7 +5,7 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'PHP',
     signDisplay: "always",
 });
-  
+
 const list = document.getElementById("transactionList");
 const form = document.getElementById("transactionForm");
 const status = document.getElementById("status");
@@ -61,7 +61,6 @@ function renderList() {
 
     transactionsBud.forEach(({ id, name, amount, date, type }) => {
         const sign = 'income' === type ? 1 : -1;
-
         const li = document.createElement('li');
 
         li.innerHTML = `
@@ -161,11 +160,13 @@ function addHistory() {
     let text = "It will clear the transaction data and move to history. Are you sure you want to save?"
     if(confirm(text) == true) {
         const li = document.createElement('history') 
-        const titleIn = document.createElement('h1')  
+        const titleIn = document.createElement('h1') 
         titleIn.innerHTML = titleInput.value; 
         li.appendChild(titleIn);
         li.innerHTML = `<div id="titleDiv">
-        <h1>${titleInput.value}</h1><span id="drop"></span></div>
+        <h1>${titleInput.value}</h1>
+        <div id="btnSpanX"><p>x</p><span id="drop"></div></span>
+        </div>
         ${saveBud.innerHTML}`;
         expList.appendChild(li);
         titleInput.value = "";
@@ -177,6 +178,27 @@ function addHistory() {
         alert("Data not moved.")
     }
 }
+
+// function addHistory() {
+//     let text = "It will clear the transaction data and move to history. Are you sure you want to save?"
+//     if(confirm(text) == true) {
+//         const li = document.createElement('history') 
+//         const titleIn = document.createElement('h1')  
+//         titleIn.innerHTML = titleInput.value; 
+//         li.appendChild(titleIn);
+//         li.innerHTML = `<div id="titleDiv">
+//         <h1>${titleInput.value}</h1><span id="drop"></span></div>
+//         ${saveBud.innerHTML}`;
+//         expList.appendChild(li);
+//         titleInput.value = "";
+//         saveH();
+//         saveHistory();
+//         removeExp();
+//         alert("Data moved to History");
+//     } else {
+//         alert("Data not moved.")
+//     }
+// }
 
 function renderExp() {
    expList.innerHTML = localStorage.getItem("saveHistBud");
@@ -240,11 +262,11 @@ function saveBudget() {
 }
 
 expList.addEventListener("click", function(e) {
-    if(e.target.tagName === "H1" || "SPAN") {
-        e.target.parentElement.parentElement.children[0].classList.toggle("active");
-        e.target.parentElement.parentElement.children[1].classList.toggle("active");
-        e.target.parentElement.parentElement.children[2].classList.toggle("active");
+    if(e.target.tagName === "SPAN") {
+        e.target.parentElement.parentElement.parentElement.children[0].classList.toggle("active");
+        e.target.parentElement.parentElement.parentElement.children[1].classList.toggle("active");
+        e.target.parentElement.parentElement.parentElement.children[2].classList.toggle("active");
         saveH();
         saveHistory();
     }
-})
+});
