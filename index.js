@@ -269,8 +269,15 @@ expList.addEventListener("click", function(e) {
         saveH();
         saveHistory();
     } else if(e.target.tagName === "P") {
-        e.target.parentElement.parentElement.parentElement.remove();
-        saveH();
-        saveHistory();
+        let text = prompt('To delete permanently? Please type "DELETE"');
+        if(text == "DELETE") {
+            alert("DELETE SUCCESSFUL");
+            e.target.parentElement.parentElement.parentElement.remove();
+            saveH();
+            saveHistory();
+        } else {
+            alert("DELETE CANCELLED");
+        }
+
     }
 });
