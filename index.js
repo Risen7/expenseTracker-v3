@@ -154,6 +154,7 @@ function addBudget() {
     }
     budget.innerHTML = formatter.format(parseInt(onHandVal) + parseInt(onBankVal)).substring(1);
     saveBudget();
+    amount2.value = "";
 }
 
 function addHistory() {
