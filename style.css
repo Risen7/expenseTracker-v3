@@ -386,6 +386,12 @@ div.line {
     padding: 2px;
 }
 
+div.enclose {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 @media (max-width: 985px) {
     body {
         flex-direction: column;
