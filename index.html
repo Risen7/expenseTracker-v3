@@ -12,10 +12,6 @@
         <h1 id="mainTitle">BUDGET</h1>
 
         <main id="mainBudget">
-            <!-- <div id="title">
-                <label for="title">Cutoff Date</label>
-                <input  type="text" class="titleInput" id="titleInput" name="title" required>
-            </div> -->
 
             <div id="saveBudget">
                 <header id="header">
@@ -25,19 +21,19 @@
                     </div>
                     <div>
                         <h5>On Hand</h5>
-                        <!-- <i>₱</i>--><span id="onHand">₱0.00</span><!--<i>.00</i> -->
+                        <span id="onHand">₱0.00</span>
                     </div>
                     <div>
                         <h5>ATM</h5>
-                        <!-- <i>₱</i>--><span id="onBank">₱0.00</span><!--<i>.00</i> -->
+                        <span id="onBank">₱0.00</span>
                     </div>
                     <div>
                         <h5>KFC Savings</h5>
-                        <!-- <i>₱</i>--><span id="kfc">₱0.00</span><!--<i>.00</i> -->
+                        <span id="kfc">₱0.00</span>
                     </div>
                     <div>
                         <h5>Invisible Money</h5>
-                        <!-- <i>₱</i>--><span id="inviMoney">₱0.00</span><!--<i>.00</i> -->
+                        <span id="inviMoney">₱0.00</span>
                     </div>
                     <div class="line"></div>
                 </header>
@@ -138,20 +134,22 @@
                         <label for="name">Name</label>
                         <input type="text" name="name" required>
                     </div>
-                    <div>
-                        <label for="amount">amount</label>
-                        <input 
-                        type="text" 
-                        name="amount" 
-                        value="0" 
-                        min="0.01" 
-                        step="0.01" 
-                        required
-                        />
-                    </div>
-                    <div>
-                        <label for="date">Date</label>
-                        <input type="date" name="date" required />
+                    <div class="enclose">
+                        <div>
+                            <label for="amount">amount</label>
+                            <input 
+                            type="text" 
+                            name="amount" 
+                            value="0" 
+                            min="0.01" 
+                            step="0.01" 
+                            required
+                            />
+                        </div>
+                        <div>
+                            <label for="date">Date</label>
+                            <input type="date" name="date" required />
+                        </div>
                     </div>
                     <button type="submit">Submit</button>
                     <button type="button" onclick="addHistory()">Save</button>
