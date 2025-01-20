@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Expense Tracker V2</title>
+    <title>Expense Tracker V3 - Ryan</title>
 </head>
 <body>
     <container>
@@ -16,26 +16,25 @@
             <div id="saveBudget">
                 <header id="header">
                     <div>
-                        <h5>Total Money</h5>
+                        <h5>Actual Budget</h5>
                         <span id="budget">0.00</span>
                     </div>
                     <div>
                         <h5>On Hand</h5>
-                        <span id="onHand">₱0.00</span>
+                        <span id="onHand">0</span>
                     </div>
                     <div>
                         <h5>ATM</h5>
-                        <span id="onBank">₱0.00</span>
+                        <span id="onBank">0</span>
                     </div>
                     <div>
                         <h5>KFC Savings</h5>
-                        <span id="kfc">₱0.00</span>
+                        <span id="kfc">0</span>
                     </div>
                     <div>
-                        <h5>Invisible Money</h5>
-                        <span id="inviMoney">₱0.00</span>
+                        <h5>Other Savings</h5>
+                        <span id="inviMoney">0</span>
                     </div>
-                    <div class="line"></div>
                 </header>
 
                 <section id="budgetTrans">
@@ -54,14 +53,11 @@
                             <option value="onHand">On Hand</option>
                             <option value="onBank">On Bank</option>
                             <option value="kfc">KFC Savings</option>
-                            <option value="inviMoney">Invisible Money</option>
+                            <option value="inviMoney">Other Savings</option>
                         </select>
                         </label>
                     </div>
-                    <!-- <div>
-                        <label for="name-2">Name</label>
-                        <input type="text" name="name-2" id="name-2" required>
-                    </div> -->
+
                     <div>
                         <label for="amount-2">amount</label>
                         <input 
@@ -74,12 +70,9 @@
                         required
                         />
                     </div>
-                    <!-- <div>
-                        <label for="date-2">Date</label>
-                        <input type="date" name="date-2" required />
-                    </div> -->
+
                     <button type="button" onclick="addBudget()">Submit</button>
-                    <!-- <button type="button" onclick="addHistory()">Save</button> -->
+
                 </form>
             </section>
         </main>
